@@ -388,6 +388,7 @@ class AdminSite(object):
         app_dict = {}
         for model, model_admin in self._registry.items():
             if app_label == model._meta.app_label:
+                app_label = model._meta.app_label
                 if has_module_perms:
                     perms = model_admin.get_model_perms(request)
 
@@ -416,7 +417,7 @@ class AdminSite(object):
         # Sort the models alphabetically within each app.
         app_dict['models'].sort(key=lambda x: x['name'])
         context = {
-            'title': _('%s administration') % capfirst(app_label),
+            'title': _('%s administration') % (app_label.title()),
             'app_list': [app_dict],
             'root_path': self.root_path,
         }

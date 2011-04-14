@@ -385,3 +385,15 @@ def get_limit_choices_to_from_path(model, path):
         return limit_choices_to # already a Q
     else:
         return models.Q(**limit_choices_to) # convert dict to Q
+
+
+class AppLabel(str):
+    def __new__(cls,value,title=None):
+        obj = str.__new__(cls, value)
+        obj._my_title = title
+        return obj
+
+    def title(self):
+        if self._my_title is not None:
+            return self._my_title
+        return super(AppLabel,self).title()
