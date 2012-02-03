@@ -8,7 +8,7 @@ import time
 from itertools import chain
 from urlparse import urljoin
 from util import flatatt
-
+from decimal import Decimal
 from django.conf import settings
 from django.utils.datastructures import MultiValueDict, MergeDict
 from django.utils.html import escape, conditional_escape
@@ -220,6 +220,8 @@ class Input(Widget):
     def _format_value(self, value):
         if self.is_localized:
             return formats.localize_input(value)
+	if isinstance(value, (float, Decimal)):
+		return u'%f' % value
         return value
 
     def render(self, name, value, attrs=None):
