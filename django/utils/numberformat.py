@@ -23,8 +23,7 @@ def format(number, decimal_sep, decimal_pos, grouping=0, thousand_sep=''):
         sign = '-'
     else:
         sign = ''
-#    str_number = unicode(number)
-    str_number = u'%f' % (number)
+    str_number = unicode(number)
     if str_number[0] == '-':
         str_number = str_number[1:]
     # decimal part
